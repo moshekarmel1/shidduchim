@@ -36,14 +36,16 @@ db.query(dbScripts.initTables, [], (err, res) => {
     }
 });
 
-// default home page
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/public/views/index.html');
 });
 
-// default home page
 app.get('/login', function(req, res){
     res.sendFile(__dirname + '/public/views/login.html');
+});
+
+app.get('/sign-up', function(req, res){
+    res.sendFile(__dirname + '/public/views/sign-up.html');
 });
 
 function removeTime(date){
