@@ -7,11 +7,11 @@ const db = require('./db/index');
 const dbScripts = require('./db/scripts').modules;
 
 passport.use(new LocalStrategy(
-    function(username, password, done) {
-        db.query(dbScripts.findUserByUsername, [username], function (err, userResponse) {
+    function(email, password, done) {
+        db.query(dbScripts.findUserByEmail, [email], function (err, userResponse) {
             if (err) { return done(err); }
             if (!userResponse || !userResponse.rows || !userResponse.rows[0]) {
-                return done(null, false, { message: 'Incorrect username. If this is your first time here, you need to register.' });
+                return done(null, false, { message: 'Incorrect email. If this is your first time here, you need to sign up.' });
             }
             const user = userResponse.rows[0];
             if (!userAuth.validPassword(password, user)) {

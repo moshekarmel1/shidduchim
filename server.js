@@ -1,9 +1,12 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const { expressjwt: jwt } = require('express-jwt');
 
 const app = express();
 
 const db = require('./db/index');
 const dbScripts = require('./db/scripts').modules;
+const userAuth = require('./auth/index').modules;
 
 app.all('/*', function(req, res, next) {
   // CORS headers
@@ -46,6 +49,56 @@ app.get('/login', function(req, res){
 
 app.get('/sign-up', function(req, res){
     res.sendFile(__dirname + '/public/views/sign-up.html');
+});
+// authentication middleware
+const auth = jwt({
+    secret: process.env.SECRET || 'pizza', 
+    algorithms: ['HS256'], 
+    userProperty: 'payload'
+});
+// route to register new user
+app.post('/register', function(req, res, next){
+    if(!req.body.email || !req.body.password){
+        return res.status(400).json({message: 'Please fill out all fields'});
+    }
+    let user = {};
+    user.email = req.body.email;
+    user = userAuth.setPassword(req.body.password, user);
+    db.query(dbScripts.createUser, [
+        user.email,
+        user.hash,
+        user.salt,
+        user.googleId
+    ], function (err, response){
+        if(err){
+            if(err.code === '23505'){
+                return res.status(400).json({message: 'Sorry that email is already taken'});
+            }
+            return next(err);
+        }
+        user.user_id = response.rows[0].user_id;
+        return res.status(200).json({
+            token: userAuth.generateJWT(user)
+        });
+    });
+});
+// login route
+app.post('/login', function(req, res, next){
+    if(!req.body.email || !req.body.password){
+        return res.status(400).json({message: 'Please fill out all fields'});
+    }
+    passport.authenticate('local', function(err, user, info){
+        if(err){
+            return next(err);
+        }
+        if(user){
+            return res.status(200).json({
+                token: userAuth.generateJWT(user)
+            });
+        } else {
+            return res.status(401).json(info);
+        }
+    })(req, res, next);
 });
 
 function removeTime(date){

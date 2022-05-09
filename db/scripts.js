@@ -2,13 +2,13 @@ exports.modules = {
     initTables: `
         CREATE TABLE IF NOT EXISTS app_user (
             user_id serial PRIMARY KEY,
-            username varchar(50) NOT NULL,
+            email varchar(500) NOT NULL,
             hash varchar(500) NULL,
             salt varchar(500) NULL,
             google_id varchar(500) NULL,
             create_date TIMESTAMP default NOW()
         );
-        CREATE UNIQUE INDEX IF NOT EXISTS unique_username ON app_user (username);
+        CREATE UNIQUE INDEX IF NOT EXISTS unique_email ON app_user (email);
         CREATE TABLE IF NOT EXISTS app_zivug (
             zivug_id serial PRIMARY KEY,
             gender char(1) not null default 'm' check(gender in ('m', 'f')),
@@ -43,15 +43,15 @@ exports.modules = {
         );
     `,
     createUser: `
-        INSERT INTO app_user (username, hash, salt, google_id) VALUES 
+        INSERT INTO app_user (email, hash, salt, google_id) VALUES 
         ($1, $2, $3, $4)
         RETURNING *
     `,
     findUser: `
         Select * From app_user Where user_id = $1;
     `,
-    findUserByUsername: `
-        Select * From app_user Where username = $1;
+    findUserByEmail: `
+        Select * From app_user Where email = $1;
     `,
     findUserByGoogleId: `
         Select * From app_user Where google_id = $1;
