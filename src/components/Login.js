@@ -1,10 +1,5 @@
 import { useState } from "react";
-import PropTypes from "prop-types";
 import "./Login.css";
-
-Login.propTypes = {
-  setToken: PropTypes.func.isRequired,
-};
 
 async function loginUser(credentials) {
   return fetch("http://localhost:8080/login", {
@@ -16,9 +11,13 @@ async function loginUser(credentials) {
   }).then((data) => data.json());
 }
 
-function Login({ setToken }) {
+function Login() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+
+  function setToken(userToken) {
+    localStorage.setItem('token', JSON.stringify(userToken));
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -53,7 +52,7 @@ function Login({ setToken }) {
                 placeholder="name@example.com"
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <label for="floatingInput">Email address</label>
+              <label htmlFor="floatingInput">Email address</label>
             </div>
             <div className="form-floating">
               <input
@@ -63,7 +62,7 @@ function Login({ setToken }) {
                 placeholder="Password"
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <label for="floatingPassword">Password</label>
+              <label htmlFor="floatingPassword">Password</label>
             </div>
 
             <div className="checkbox mb-3">

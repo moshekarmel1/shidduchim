@@ -24,6 +24,8 @@ app.all('/*', function(req, res, next) {
 
 //serve files from the public dir
 app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // global error handler
 app.use(function(err, req, res, next) {
@@ -39,17 +41,12 @@ db.query(dbScripts.initTables, [], (err, res) => {
     }
 });
 
-app.get('/', function(req, res){
-  res.sendFile(__dirname + '/public/views/index.html');
+app.get('/api/hello', function(req, res){
+  res.json({
+    message: 'Hello World!'
+  })
 });
 
-app.get('/login', function(req, res){
-    res.sendFile(__dirname + '/public/views/login.html');
-});
-
-app.get('/sign-up', function(req, res){
-    res.sendFile(__dirname + '/public/views/sign-up.html');
-});
 // authentication middleware
 const auth = jwt({
     secret: process.env.SECRET || 'pizza', 
@@ -57,7 +54,7 @@ const auth = jwt({
     userProperty: 'payload'
 });
 // route to register new user
-app.post('/register', function(req, res, next){
+app.post('/api/sign-up', function(req, res, next){
     if(!req.body.email || !req.body.password){
         return res.status(400).json({message: 'Please fill out all fields'});
     }
@@ -83,7 +80,7 @@ app.post('/register', function(req, res, next){
     });
 });
 // login route
-app.post('/login', function(req, res, next){
+app.post('/api/login', function(req, res, next){
     if(!req.body.email || !req.body.password){
         return res.status(400).json({message: 'Please fill out all fields'});
     }
@@ -105,8 +102,8 @@ function removeTime(date){
     return new Date(new Date(date).setHours(0,0,0,0));
 }
 
-const PORT = process.env.PORT || '3000';
+const PORT = process.env.PORT || '4000';
 
-const server = app.listen(PORT, function(){
+const server = app.listen('4000', function(){
   console.log('Server is running!');
 });
