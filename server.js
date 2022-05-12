@@ -1,12 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { expressjwt: jwt } = require('express-jwt');
+const passport = require('passport');
 
 const app = express();
 
 const db = require('./db/index');
 const dbScripts = require('./db/scripts').modules;
 const userAuth = require('./auth/index').modules;
+require('./auth/passport');
 
 app.all('/*', function(req, res, next) {
   // CORS headers
@@ -26,6 +28,7 @@ app.all('/*', function(req, res, next) {
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(passport.initialize());
 
 // global error handler
 app.use(function(err, req, res, next) {

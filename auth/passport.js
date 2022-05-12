@@ -3,10 +3,12 @@ const LocalStrategy = require('passport-local').Strategy;
 // var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 const userAuth = require('./index').modules;
-const db = require('./db/index');
-const dbScripts = require('./db/scripts').modules;
+const db = require('../db/index');
+const dbScripts = require('../db/scripts').modules;
 
-passport.use(new LocalStrategy(
+passport.use('local', new LocalStrategy({
+        usernameField: 'email',
+    },
     function(email, password, done) {
         db.query(dbScripts.findUserByEmail, [email], function (err, userResponse) {
             if (err) { return done(err); }

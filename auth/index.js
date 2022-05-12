@@ -19,7 +19,7 @@ exports.modules = {
 	
 		return jwt.sign({
 			_id: user.user_id,
-			username: user.username,
+			email: user.email,
 			exp: parseInt(exp.getTime() / 1000),
 		}, process.env.SECRET || 'pizza');
 	}
