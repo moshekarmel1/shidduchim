@@ -1,4 +1,11 @@
+import { useEffect, useState } from "react";
+
 function Header() {
+  let userData;
+  const token = localStorage.getItem("token");
+  if (token) {
+    userData = JSON.parse(atob(JSON.parse(token).token.split(".")[1]));
+  }
   return (
     <header className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
       <a
@@ -38,12 +45,31 @@ function Header() {
       </ul>
 
       <div className="col-md-3 text-end">
-        <a type="button" className="btn btn-outline-primary me-2" href="/login">
-          Login
-        </a>
-        <a type="button" className="btn btn-primary" href="/sign-up">
-          Sign-up
-        </a>
+        {userData ? (
+          <div>
+            <span style={{marginRight: 5 + 'px'}} className="fs-7 ml-2">Welcome {userData.email}!</span>
+            <a
+              type="button"
+              className="btn btn-sm btn-outline-primary me-2"
+              href="/logout"
+            >
+              Logout
+            </a>
+          </div>
+        ) : (
+          <div>
+            <a
+              type="button"
+              className="btn btn-outline-primary me-2"
+              href="/login"
+            >
+              Login
+            </a>
+            <a type="button" className="btn btn-primary" href="/sign-up">
+              Sign-up
+            </a>
+          </div>
+        )}
       </div>
     </header>
   );
