@@ -1,9 +1,9 @@
 exports.modules = {
     initTables: `
-        --drop table if exists app_references;
-        --drop table if exists app_girl;
-        --drop table if exists app_boy;
-        --drop table if exists app_zivug;
+        drop table if exists app_references;
+        drop table if exists app_girl;
+        drop table if exists app_boy;
+        drop table if exists app_zivug;
         --drop table if exists app_user;
         CREATE TABLE IF NOT EXISTS app_user (
             user_id serial PRIMARY KEY,
@@ -16,10 +16,14 @@ exports.modules = {
         CREATE UNIQUE INDEX IF NOT EXISTS unique_email ON app_user (email);
         CREATE TABLE IF NOT EXISTS app_zivug (
             zivug_id serial PRIMARY KEY,
-            gender char(1) not null default 'm' check(gender in ('m', 'f')),
             name varchar(50) NOT NULL,
+            gender char(1) not null default 'm' check(gender in ('m', 'f')),
             dob TIMESTAMP NOT NULL,
-            zip_code varchar(50) NOT NULL,
+            height varchar(50) NOT NULL,
+            address varchar(50) NULL,
+            state varchar(50) NULL,
+            zip varchar(50) NOT NULL,
+            phone varchar(50) NOT NULL,
             yeshivishness INT NULL,
             create_date TIMESTAMP default NOW(),
             created_by INT,
@@ -62,8 +66,8 @@ exports.modules = {
         Select * From app_user Where google_id = $1;
     `,
     createZivug: `
-        INSERT INTO app_zivug (name, gender, dob, zip_code, yeshivishness) VALUES 
-        ($1, $2, $3, $4, $5)
+        INSERT INTO app_zivug (name, gender, dob, height, address, state, zip, phone, created_by) VALUES 
+        ($1, $2, $3, $4, $5, $6, $7, $8, $9)
         RETURNING *;
     `,
     updateZivug: `

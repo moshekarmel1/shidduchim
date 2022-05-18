@@ -16,7 +16,7 @@ function Login() {
   const [password, setPassword] = useState();
 
   function setToken(userToken) {
-    localStorage.setItem('token', JSON.stringify(userToken));
+    localStorage.setItem('shidduch-token', userToken.token);
   }
 
   const handleSubmit = async (e) => {

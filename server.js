@@ -101,6 +101,26 @@ app.post('/api/login', function(req, res, next){
     })(req, res, next);
 });
 
+app.post('/api/zivug', auth, function(req, res, next){
+    console.log(req.body, req.auth);
+    db.query(dbScripts.createZivug, [
+        req.body.name,
+        req.body.gender,
+        req.body.dob,
+        req.body.height,
+        req.body.address,
+        req.body.state,
+        req.body.zip,
+        req.body.phone,
+        req.auth._id
+    ], function(err, response){
+        if(err){
+            return next(err);
+        }
+        return res.status(200).json(response.rows[0]);
+    });
+});
+
 function removeTime(date){
     return new Date(new Date(date).setHours(0,0,0,0));
 }

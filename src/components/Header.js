@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 
 function Header() {
   let userData;
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("shidduch-token");
   if (token) {
-    userData = JSON.parse(atob(JSON.parse(token).token.split(".")[1]));
+    userData = JSON.parse(atob(token.split(".")[1]));
   }
   return (
     <header className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
