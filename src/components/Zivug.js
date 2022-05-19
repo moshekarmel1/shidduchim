@@ -102,7 +102,7 @@ function Zivug() {
                   placeholder=""
                   required=""
                   value={data.name}
-                  onChange={(e) => data.name = e.target.value}
+                  onChange={(e) => (data.name = e.target.value)}
                 />
                 <div className="invalid-feedback">Valid name is required.</div>
               </div>
@@ -116,7 +116,7 @@ function Zivug() {
                   id="gender"
                   required=""
                   value={data.gender}
-                  onChange={(e) => data.gender = e.target.value}
+                  onChange={(e) => (data.gender = e.target.value)}
                 >
                   <option>Choose...</option>
                   <option value={"m"}>Male</option>
@@ -132,13 +132,13 @@ function Zivug() {
                   DOB
                 </label>
                 <input
-                  type="text"
+                  type="date"
                   className="form-control"
                   id="dob"
                   placeholder=""
                   required=""
-                  value={data.dob}
-                  onChange={(e) => data.dob = e.target.value}
+                  value={data.dob.split('T')[0]}
+                  onChange={(e) => (data.dob = e.target.value)}
                 />
                 <div className="invalid-feedback">
                   Valid Date Of Birth is required.
@@ -153,10 +153,10 @@ function Zivug() {
                   type="text"
                   className="form-control"
                   id="height"
-                  placeholder=""
+                  placeholder="5-08"
                   required=""
                   value={data.height}
-                  onChange={(e) => data.height = e.target.value}
+                  onChange={(e) => (data.height = e.target.value)}
                 />
                 <div className="invalid-feedback">
                   Valid height is required.
@@ -174,7 +174,7 @@ function Zivug() {
                   placeholder="1234 Main St"
                   required=""
                   value={data.address}
-                  onChange={(e) => data.address = e.target.value}
+                  onChange={(e) => (data.address = e.target.value)}
                 />
                 <div className="invalid-feedback">
                   Please enter your shipping address.
@@ -190,10 +190,60 @@ function Zivug() {
                   id="state"
                   required=""
                   value={data.state}
-                  onChange={(e) => data.state = e.target.value}
+                  onChange={(e) => (data.state = e.target.value)}
                 >
                   <option>Choose...</option>
-                  <option>California</option>
+                  <option value="AL">Alabama</option>
+                  <option value="AK">Alaska</option>
+                  <option value="AZ">Arizona</option>
+                  <option value="AR">Arkansas</option>
+                  <option value="CA">California</option>
+                  <option value="CO">Colorado</option>
+                  <option value="CT">Connecticut</option>
+                  <option value="DE">Delaware</option>
+                  <option value="DC">District Of Columbia</option>
+                  <option value="FL">Florida</option>
+                  <option value="GA">Georgia</option>
+                  <option value="HI">Hawaii</option>
+                  <option value="ID">Idaho</option>
+                  <option value="IL">Illinois</option>
+                  <option value="IN">Indiana</option>
+                  <option value="IA">Iowa</option>
+                  <option value="KS">Kansas</option>
+                  <option value="KY">Kentucky</option>
+                  <option value="LA">Louisiana</option>
+                  <option value="ME">Maine</option>
+                  <option value="MD">Maryland</option>
+                  <option value="MA">Massachusetts</option>
+                  <option value="MI">Michigan</option>
+                  <option value="MN">Minnesota</option>
+                  <option value="MS">Mississippi</option>
+                  <option value="MO">Missouri</option>
+                  <option value="MT">Montana</option>
+                  <option value="NE">Nebraska</option>
+                  <option value="NV">Nevada</option>
+                  <option value="NH">New Hampshire</option>
+                  <option value="NJ">New Jersey</option>
+                  <option value="NM">New Mexico</option>
+                  <option value="NY">New York</option>
+                  <option value="NC">North Carolina</option>
+                  <option value="ND">North Dakota</option>
+                  <option value="OH">Ohio</option>
+                  <option value="OK">Oklahoma</option>
+                  <option value="OR">Oregon</option>
+                  <option value="PA">Pennsylvania</option>
+                  <option value="RI">Rhode Island</option>
+                  <option value="SC">South Carolina</option>
+                  <option value="SD">South Dakota</option>
+                  <option value="TN">Tennessee</option>
+                  <option value="TX">Texas</option>
+                  <option value="UT">Utah</option>
+                  <option value="VT">Vermont</option>
+                  <option value="VA">Virginia</option>
+                  <option value="WA">Washington</option>
+                  <option value="WV">West Virginia</option>
+                  <option value="WI">Wisconsin</option>
+                  <option value="WY">Wyoming</option>
                 </select>
                 <div className="invalid-feedback">
                   Please provide a valid state.
@@ -211,7 +261,7 @@ function Zivug() {
                   placeholder=""
                   required=""
                   value={data.zip}
-                  onChange={(e) => data.zip = e.target.value}
+                  onChange={(e) => (data.zip = e.target.value)}
                 />
                 <div className="invalid-feedback">Zip code required.</div>
               </div>
@@ -227,7 +277,7 @@ function Zivug() {
                   placeholder=""
                   required=""
                   value={data.phone}
-                  onChange={(e) => data.phone = e.target.value}
+                  onChange={(e) => (data.phone = e.target.value)}
                 />
                 <div className="invalid-feedback">
                   Please select a valid phone.

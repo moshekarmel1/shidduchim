@@ -18,7 +18,7 @@ exports.modules = {
             zivug_id serial PRIMARY KEY,
             name varchar(50) NOT NULL,
             gender char(1) not null default 'm' check(gender in ('m', 'f')),
-            dob TIMESTAMP NOT NULL,
+            dob date NOT NULL,
             height varchar(50) NOT NULL,
             address varchar(50) NULL,
             state varchar(50) NULL,
@@ -72,7 +72,9 @@ exports.modules = {
     `,
     updateZivug: `
         UPDATE app_zivug
-        SET 1=1
+        SET name=$2,
+        gender=$3,
+        
         WHERE zivug_id = $1
         RETURNING *;
     `,

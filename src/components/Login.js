@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import { loginUser, setToken } from "./Service";
 
 
 function Login() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
@@ -14,6 +16,7 @@ function Login() {
       password,
     });
     setToken(token);
+    navigate("/home");
   };
 
   return (

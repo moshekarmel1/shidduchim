@@ -121,6 +121,27 @@ app.post('/api/zivug', auth, function(req, res, next){
     });
 });
 
+app.put('/api/zivug/:zivug_id', auth, function(req, res, next){
+    console.log(req.body, req.auth);
+    db.query(dbScripts.updateZivug, [
+        req.body.zivug_id,
+        req.body.name,
+        req.body.gender,
+        req.body.dob,
+        req.body.height,
+        req.body.address,
+        req.body.state,
+        req.body.zip,
+        req.body.phone,
+        req.auth._id
+    ], function(err, response){
+        if(err){
+            return next(err);
+        }
+        return res.status(200).json(response.rows[0]);
+    });
+});
+
 app.get('/api/my', auth, function(req, res, next){
     db.query(dbScripts.getZivugimSubmittedByUser, [req.auth._id], function(err, response){
         if(err){

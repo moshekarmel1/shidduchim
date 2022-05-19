@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { createZivug } from "./Service";
 
 function Submit() {
+  const navigate = useNavigate();
   const [name, setName] = useState();
   const [gender, setGender] = useState();
   const [dob, setDOB] = useState();
@@ -21,9 +23,10 @@ function Submit() {
       address: address,
       state: state,
       zip: zip,
-      phone: phone
+      phone: phone,
     });
     console.log(response);
+    navigate(`/zivug/${response.zivug_id}`);
   };
 
   return (
@@ -84,7 +87,11 @@ function Submit() {
         </div>
         <div className="col-md-7 col-lg-8">
           <h4 className="mb-3">Basic Info</h4>
-          <form className="needs-validation" noValidate="" onSubmit={handleSubmit}>
+          <form
+            className="needs-validation"
+            noValidate=""
+            onSubmit={handleSubmit}
+          >
             <div className="row g-3">
               <div className="col-sm-6">
                 <label htmlFor="name" className="form-label">
@@ -98,19 +105,22 @@ function Submit() {
                   required=""
                   onChange={(e) => setName(e.target.value)}
                 />
-                <div className="invalid-feedback">
-                  Valid name is required.
-                </div>
+                <div className="invalid-feedback">Valid name is required.</div>
               </div>
 
               <div className="col-sm-6">
-              <label htmlFor="gender" className="form-label">
+                <label htmlFor="gender" className="form-label">
                   Gender
                 </label>
-                <select className="form-select" id="gender" required="" onChange={(e) => setGender(e.target.value)}>
+                <select
+                  className="form-select"
+                  id="gender"
+                  required=""
+                  onChange={(e) => setGender(e.target.value)}
+                >
                   <option>Choose...</option>
-                  <option value={'m'}>Male</option>
-                  <option value={'f'}>Female</option>
+                  <option value={"m"}>Male</option>
+                  <option value={"f"}>Female</option>
                 </select>
                 <div className="invalid-feedback">
                   Please provide a valid gender.
@@ -122,7 +132,7 @@ function Submit() {
                   DOB
                 </label>
                 <input
-                  type="text"
+                  type="date"
                   className="form-control"
                   id="dob"
                   placeholder=""
@@ -146,7 +156,9 @@ function Submit() {
                   required=""
                   onChange={(e) => setHeight(e.target.value)}
                 />
-                <div className="invalid-feedback">Valid height is required.</div>
+                <div className="invalid-feedback">
+                  Valid height is required.
+                </div>
               </div>
 
               <div className="col-12">
@@ -170,9 +182,65 @@ function Submit() {
                 <label htmlFor="state" className="form-label">
                   State
                 </label>
-                <select className="form-select" id="state" required="" onChange={(e) => setState(e.target.value)}>
+                <select
+                  className="form-select"
+                  id="state"
+                  required=""
+                  onChange={(e) => setState(e.target.value)}
+                >
                   <option>Choose...</option>
-                  <option>California</option>
+                  <option>Choose...</option>
+                  <option value="AL">Alabama</option>
+                  <option value="AK">Alaska</option>
+                  <option value="AZ">Arizona</option>
+                  <option value="AR">Arkansas</option>
+                  <option value="CA">California</option>
+                  <option value="CO">Colorado</option>
+                  <option value="CT">Connecticut</option>
+                  <option value="DE">Delaware</option>
+                  <option value="DC">District Of Columbia</option>
+                  <option value="FL">Florida</option>
+                  <option value="GA">Georgia</option>
+                  <option value="HI">Hawaii</option>
+                  <option value="ID">Idaho</option>
+                  <option value="IL">Illinois</option>
+                  <option value="IN">Indiana</option>
+                  <option value="IA">Iowa</option>
+                  <option value="KS">Kansas</option>
+                  <option value="KY">Kentucky</option>
+                  <option value="LA">Louisiana</option>
+                  <option value="ME">Maine</option>
+                  <option value="MD">Maryland</option>
+                  <option value="MA">Massachusetts</option>
+                  <option value="MI">Michigan</option>
+                  <option value="MN">Minnesota</option>
+                  <option value="MS">Mississippi</option>
+                  <option value="MO">Missouri</option>
+                  <option value="MT">Montana</option>
+                  <option value="NE">Nebraska</option>
+                  <option value="NV">Nevada</option>
+                  <option value="NH">New Hampshire</option>
+                  <option value="NJ">New Jersey</option>
+                  <option value="NM">New Mexico</option>
+                  <option value="NY">New York</option>
+                  <option value="NC">North Carolina</option>
+                  <option value="ND">North Dakota</option>
+                  <option value="OH">Ohio</option>
+                  <option value="OK">Oklahoma</option>
+                  <option value="OR">Oregon</option>
+                  <option value="PA">Pennsylvania</option>
+                  <option value="RI">Rhode Island</option>
+                  <option value="SC">South Carolina</option>
+                  <option value="SD">South Dakota</option>
+                  <option value="TN">Tennessee</option>
+                  <option value="TX">Texas</option>
+                  <option value="UT">Utah</option>
+                  <option value="VT">Vermont</option>
+                  <option value="VA">Virginia</option>
+                  <option value="WA">Washington</option>
+                  <option value="WV">West Virginia</option>
+                  <option value="WI">Wisconsin</option>
+                  <option value="WY">Wyoming</option>
                 </select>
                 <div className="invalid-feedback">
                   Please provide a valid state.
@@ -199,13 +267,13 @@ function Submit() {
                   Phone
                 </label>
                 <input
-                    type="text"
-                    className="form-control"
-                    id="phone"
-                    placeholder=""
-                    required=""
-                    onChange={(e) => setPhone(e.target.value)}
-                  />
+                  type="text"
+                  className="form-control"
+                  id="phone"
+                  placeholder=""
+                  required=""
+                  onChange={(e) => setPhone(e.target.value)}
+                />
                 <div className="invalid-feedback">
                   Please select a valid phone.
                 </div>
