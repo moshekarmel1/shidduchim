@@ -1,23 +1,10 @@
 import { useState } from "react";
 import "./Login.css";
-
-async function signupUser(credentials) {
-  return fetch("/api/sign-up", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(credentials),
-  }).then((data) => data.json());
-}
+import { setToken, signupUser } from "./Service";
 
 function Signup() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-
-  function setToken(userToken) {
-    localStorage.setItem('shidduch-token', userToken.token);
-  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();

@@ -1,4 +1,5 @@
 import logo from "./../logo.svg";
+import MySubmissions from "./MySubmissions";
 
 function Home() {
   return (
@@ -58,6 +59,14 @@ function Home() {
               Find out more &raquo;
             </a>
           </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-6">
+          <MySubmissions />
+        </div>
+        <div className="col-md-6">
+          
         </div>
       </div>
     </div>

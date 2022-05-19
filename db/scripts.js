@@ -1,9 +1,9 @@
 exports.modules = {
     initTables: `
-        drop table if exists app_references;
-        drop table if exists app_girl;
-        drop table if exists app_boy;
-        drop table if exists app_zivug;
+        --drop table if exists app_references;
+        --drop table if exists app_girl;
+        --drop table if exists app_boy;
+        --drop table if exists app_zivug;
         --drop table if exists app_user;
         CREATE TABLE IF NOT EXISTS app_user (
             user_id serial PRIMARY KEY,
@@ -81,5 +81,8 @@ exports.modules = {
     `,
     findZivugId: `
         Select * From app_zivug Where zivug_id = $1;
+    `,
+    getZivugimSubmittedByUser: `
+        Select * From app_zivug Where created_by = $1;
     `,
 }

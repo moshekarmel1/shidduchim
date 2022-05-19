@@ -121,6 +121,15 @@ app.post('/api/zivug', auth, function(req, res, next){
     });
 });
 
+app.get('/api/my', auth, function(req, res, next){
+    db.query(dbScripts.getZivugimSubmittedByUser, [req.auth._id], function(err, response){
+        if(err){
+            return next(err);
+        }
+        return res.status(200).json(response.rows);
+    });
+});
+
 function removeTime(date){
     return new Date(new Date(date).setHours(0,0,0,0));
 }

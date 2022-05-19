@@ -1,15 +1,5 @@
 import { useState } from "react";
-
-async function createZivug(zivug, token) {
-  return fetch("/api/zivug", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`
-    },
-    body: JSON.stringify(zivug),
-  }).then((data) => data.json());
-}
+import { createZivug } from "./Service";
 
 function Submit() {
   const [name, setName] = useState();
@@ -20,8 +10,6 @@ function Submit() {
   const [state, setState] = useState();
   const [zip, setZip] = useState();
   const [phone, setPhone] = useState();
-
-  const token = localStorage.getItem("shidduch-token");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,7 +22,7 @@ function Submit() {
       state: state,
       zip: zip,
       phone: phone
-    }, token);
+    });
     console.log(response);
   };
 

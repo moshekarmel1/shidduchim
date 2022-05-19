@@ -1,11 +1,8 @@
-import { useEffect, useState } from "react";
+import { isLoggedIn, getUserData } from "./Service";
 
 function Header() {
-  let userData;
-  const token = localStorage.getItem("shidduch-token");
-  if (token) {
-    userData = JSON.parse(atob(token.split(".")[1]));
-  }
+  const loggedIn = isLoggedIn();
+  const userData = getUserData();
   return (
     <header className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
       <a
@@ -45,7 +42,7 @@ function Header() {
       </ul>
 
       <div className="col-md-3 text-end">
-        {userData ? (
+        {loggedIn ? (
           <div>
             <span style={{marginRight: 5 + 'px'}} className="fs-7 ml-2">Welcome {userData.email}!</span>
             <a
