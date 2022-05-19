@@ -1,3 +1,4 @@
+import panda from "./../panda.PNG";
 import { isLoggedIn, getUserData } from "./Service";
 
 function Header() {
@@ -9,7 +10,7 @@ function Header() {
         href="/"
         className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none"
       >
-        <img src="img/panda.PNG" className="bi me-2" width="40" height="32" />
+        <img src={panda} className="bi me-2" width="40" height="32" />
         <span className="fs-4">Yeshivish Shidduchim</span>
       </a>
 

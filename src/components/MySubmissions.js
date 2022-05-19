@@ -25,7 +25,7 @@ function MySubmissions() {
       {data.map((submission) => (
         <div key={submission.zivug_id} className="media text-muted pt-3">
           <p className="pb-3 mb-0 lh-sm border-bottom">
-            <a href={`/submit/${submission.zivug_id}`} className="d-block text-gray-dark">
+            <a href={`/zivug/${submission.zivug_id}`} className="d-block text-gray-dark">
                 <i className={`fa-solid fa-person${submission.gender == 'f' ? '-dress' : ''} fa-xl`}></i>&nbsp; 
                 {submission.name}
             </a>

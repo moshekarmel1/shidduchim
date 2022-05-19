@@ -130,6 +130,15 @@ app.get('/api/my', auth, function(req, res, next){
     });
 });
 
+app.get('/api/zivug/:zivug_id', auth, function(req, res, next){
+    db.query(dbScripts.getZivugById, [req.params.zivug_id], function(err, response){
+        if(err){
+            return next(err);
+        }
+        return res.status(200).json(response.rows[0]);
+    });
+});
+
 function removeTime(date){
     return new Date(new Date(date).setHours(0,0,0,0));
 }

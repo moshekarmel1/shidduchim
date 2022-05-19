@@ -79,7 +79,7 @@ exports.modules = {
     deleteZivug: `
         Delete From app_zivug Where zivug_id = $1;
     `,
-    findZivugId: `
+    getZivugById: `
         Select * From app_zivug Where zivug_id = $1;
     `,
     getZivugimSubmittedByUser: `

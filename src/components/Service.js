@@ -33,6 +33,16 @@ export async function getMySubmissions() {
   }).then((data) => data.json());
 }
 
+export async function getZivug(zivugId) {
+  return fetch(`/api/zivug/${zivugId}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getToken()}`,
+    },
+  }).then((data) => data.json());
+}
+
 export async function createZivug(zivug) {
   return fetch("/api/zivug", {
     method: "POST",
@@ -41,6 +51,27 @@ export async function createZivug(zivug) {
       Authorization: `Bearer ${getToken()}`,
     },
     body: JSON.stringify(zivug),
+  }).then((data) => data.json());
+}
+
+export async function updateZivug(zivug) {
+  return fetch(`/api/zivug/${zivug.zivug_id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getToken()}`,
+    },
+    body: JSON.stringify(zivug),
+  }).then((data) => data.json());
+}
+
+export async function deleteZivug(zivug) {
+  return fetch(`/api/zivug/${zivug.zivug_id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getToken()}`,
+    },
   }).then((data) => data.json());
 }
 
