@@ -8,3 +8,15 @@ body {
   align-items: center;
   background-color: #f5f5f5;
 }
+
+a.disabled {
+  /* Make the disabled links grayish*/
+  color: gray;
+  /* And disable the pointer events */
+  pointer-events: none;
+}
+
+.list-group-item.active {
+  background-color: #0dcaf0;
+  border-color: #0dcaf0;
+}

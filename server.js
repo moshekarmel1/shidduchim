@@ -160,9 +160,73 @@ app.get('/api/zivug/:zivug_id', auth, function(req, res, next){
     });
 });
 
-function removeTime(date){
-    return new Date(new Date(date).setHours(0,0,0,0));
-}
+app.get('/api/zivug/:zivug_id/references', auth, function(req, res, next){
+    db.query(dbScripts.getReferencesForZivug, [req.params.zivug_id], function(err, response){
+        if(err){
+            return next(err);
+        }
+        return res.status(200).json(response.rows);
+    });
+});
+
+app.post('/api/zivug/:zivug_id/references', auth, function(req, res, next){
+    console.log(req.body, req.auth);
+    db.query(dbScripts.createReference, [
+        req.params.zivug_id,
+        req.body.name,
+        req.body.phone,
+        req.body.relationship,
+        req.auth._id
+    ], function(err, response){
+        if(err){
+            return next(err);
+        }
+        return res.status(200).json(response.rows[0]);
+    });
+});
+
+app.delete('/api/zivug/:zivug_id/education/:education_id', auth, function(req, res, next){
+    db.query(dbScripts.deleteEducation, [req.params.reference_id], function(err, response){
+        if(err){
+            return next(err);
+        }
+        return res.status(200).json(response.rows);
+    });
+});
+
+app.get('/api/zivug/:zivug_id/education', auth, function(req, res, next){
+    db.query(dbScripts.getEducationsForZivug, [req.params.zivug_id], function(err, response){
+        if(err){
+            return next(err);
+        }
+        return res.status(200).json(response.rows);
+    });
+});
+
+app.post('/api/zivug/:zivug_id/education', auth, function(req, res, next){
+    console.log(req.body, req.auth);
+    db.query(dbScripts.createEducation, [
+        req.params.zivug_id,
+        req.body.name,
+        req.body.from_year,
+        req.body.to_year,
+        req.auth._id
+    ], function(err, response){
+        if(err){
+            return next(err);
+        }
+        return res.status(200).json(response.rows[0]);
+    });
+});
+
+app.delete('/api/zivug/:zivug_id/education/:education_id', auth, function(req, res, next){
+    db.query(dbScripts.deleteEducation, [req.params.education_id], function(err, response){
+        if(err){
+            return next(err);
+        }
+        return res.status(200).json(response.rows);
+    });
+});
 
 const PORT = process.env.PORT || '4000';
 

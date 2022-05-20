@@ -16,9 +16,11 @@ function MySubmissions() {
   if (isLoading) {
     return <div>Loading...</div>;
   }
+
   if (data.length === 0) {
     return <div></div>;
   }
+
   return (
     <div className="my-3 p-3 bg-body rounded shadow-sm">
       <h6 className="border-bottom pb-2 mb-0">Submitted by you</h6>

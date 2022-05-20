@@ -6,6 +6,8 @@ import Signup from "./components/Signup";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Submit from "./components/Submit";
 import Zivug from "./components/Zivug";
+import References from "./components/References";
+import Education from "./components/Education";
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
             <Route exact path="/sign-up" element={<Signup />} />
             <Route exact path="/submit" element={<Submit />} />
             <Route exact path="/zivug/:zivug_id" element={<Zivug />} />
+            <Route exact path="/zivug/:zivug_id/references" element={<References />} />
+            <Route exact path="/zivug/:zivug_id/education" element={<Education />} />
           </Routes>
         </div>
       </div>

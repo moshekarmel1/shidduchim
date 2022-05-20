@@ -9,6 +9,7 @@ function Zivug() {
   const [data, setData] = useState({});
   const [feet, setFeet] = useState();
   const [inches, setInches] = useState();
+
   useEffect(() => {
     const getData = async () => {
       const zivug = await getZivug(zivug_id);
@@ -38,7 +39,7 @@ function Zivug() {
   return (
     <div>
       <div className="row g-5">
-        <Sidebar />
+        <Sidebar active="Basic" />
         <div className="col-md-7 col-lg-8">
           <h4 className="mb-3">Basic Info</h4>
           <form

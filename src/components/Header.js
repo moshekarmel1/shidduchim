@@ -4,6 +4,7 @@ import { isLoggedIn, getUserData } from "./Service";
 function Header() {
   const loggedIn = isLoggedIn();
   const userData = getUserData();
+
   return (
     <header className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
       <a

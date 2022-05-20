@@ -34,7 +34,7 @@ function Submit() {
   return (
     <div>
       <div className="row g-5">
-        <Sidebar />
+        <Sidebar active="Basic" />
         <div className="col-md-7 col-lg-8">
           <h4 className="mb-3">Basic Info</h4>
           <form

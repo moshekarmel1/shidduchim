@@ -3,6 +3,7 @@ exports.modules = {
         --drop table if exists app_references;
         --drop table if exists app_zivug;
         --drop table if exists app_user;
+        drop table app_education;
         CREATE TABLE IF NOT EXISTS app_user (
             user_id serial PRIMARY KEY,
             email varchar(500) NOT NULL,
@@ -22,6 +23,8 @@ exports.modules = {
             state varchar(50) NULL,
             zip varchar(50) NOT NULL,
             phone varchar(50) NOT NULL,
+            mom varchar(255) NOT NULL,
+            dad varchar(255) NOT NULL,
             yeshivishness INT NULL,
             create_date TIMESTAMP default NOW(),
             created_by INT,
@@ -35,6 +38,24 @@ exports.modules = {
             name varchar(50) NOT NULL,
             phone_number varchar(50) NOT NULL,
             relationship varchar(50) NOT NULL,
+            create_date TIMESTAMP default NOW(),
+            created_by INT
+        );
+        CREATE TABLE IF NOT EXISTS app_education (
+            education_id serial PRIMARY KEY,
+            zivug_id INT NOT NULL REFERENCES app_zivug (zivug_id),
+            name varchar(255) NOT NULL,
+            from_year INT NULL,
+            to_year INT NULL,
+            create_date TIMESTAMP default NOW(),
+            created_by INT
+        );
+        CREATE TABLE IF NOT EXISTS app_family (
+            education_id serial PRIMARY KEY,
+            zivug_id INT NOT NULL REFERENCES app_zivug (zivug_id),
+            name varchar(100) NOT NULL,
+            description varchar(255) NULL,
+            dob Date NULL,
             create_date TIMESTAMP default NOW(),
             created_by INT
         );
@@ -74,5 +95,27 @@ exports.modules = {
     `,
     getZivugimSubmittedByUser: `
         Select * From app_zivug Where created_by = $1;
+    `,
+    createReference: `
+        INSERT INTO app_references (zivug_id, name, phone_number, relationship, created_by) VALUES 
+        ($1, $2, $3, $4, $5)
+        RETURNING *;
+    `,
+    deleteReference: `
+        Delete From app_references Where reference_id = $1;
+    `,
+    getReferencesForZivug: `
+        Select * From app_references Where zivug_id = $1;
+    `,
+    createEducation: `
+        INSERT INTO app_education (zivug_id, name, from_year, to_year, created_by) VALUES 
+        ($1, $2, $3, $4, $5)
+        RETURNING *;
+    `,
+    deleteEducation: `
+        Delete From app_education Where education_id = $1;
+    `,
+    getEducationsForZivug: `
+        Select * From app_education Where zivug_id = $1;
     `,
 }

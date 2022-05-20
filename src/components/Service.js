@@ -75,6 +75,68 @@ export async function deleteZivug(zivug) {
   }).then((data) => data.json());
 }
 
+export async function createReference(reference) {
+  return fetch(`/api/zivug/${reference.zivug_id}/references`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getToken()}`,
+    },
+    body: JSON.stringify(reference),
+  }).then((data) => data.json());
+}
+
+export async function getReferencesForZivug(zivugId) {
+  return fetch(`/api/zivug/${zivugId}/references`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getToken()}`,
+    },
+  }).then((data) => data.json());
+}
+
+export async function deleteReference(zivugId, referenceId) {
+  return fetch(`/api/zivug/${zivugId}/references/${referenceId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getToken()}`,
+    },
+  }).then((data) => data.json());
+}
+
+export async function createEducation(education) {
+  return fetch(`/api/zivug/${education.zivug_id}/education`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getToken()}`,
+    },
+    body: JSON.stringify(education),
+  }).then((data) => data.json());
+}
+
+export async function getEducationForZivug(zivugId) {
+  return fetch(`/api/zivug/${zivugId}/education`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getToken()}`,
+    },
+  }).then((data) => data.json());
+}
+
+export async function deleteEducation(zivugId, educationId) {
+  return fetch(`/api/zivug/${zivugId}/education/${educationId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getToken()}`,
+    },
+  }).then((data) => data.json());
+}
+
 export async function loginUser(credentials) {
   return fetch("/api/login", {
     method: "POST",
@@ -101,6 +163,11 @@ export function convertInchesToFeet(inches) {
 
 export function getRemainingInches(inches) {
   return inches % 12;
+}
+
+export function calcAge(dateString) {
+  var birthday = +new Date(dateString);
+  return ~~((Date.now() - birthday) / 31557600000);
 }
 
 export const timeAgo = (() => {
