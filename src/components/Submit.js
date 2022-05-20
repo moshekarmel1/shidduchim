@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createZivug } from "./Service";
+import Sidebar from "./Sidebar";
 
 function Submit() {
   const navigate = useNavigate();
   const [name, setName] = useState();
   const [gender, setGender] = useState();
   const [dob, setDOB] = useState();
-  const [height, setHeight] = useState();
+  const [feet, setFeet] = useState();
+  const [inches, setInches] = useState();
   const [address, setAddress] = useState();
   const [state, setState] = useState();
   const [zip, setZip] = useState();
@@ -19,7 +21,7 @@ function Submit() {
       name: name,
       gender: gender,
       dob: dob,
-      height: height,
+      height: (+feet * 12) + +inches,
       address: address,
       state: state,
       zip: zip,
@@ -32,59 +34,7 @@ function Submit() {
   return (
     <div>
       <div className="row g-5">
-        <div className="col-md-5 col-lg-4 order-md-last">
-          <h4 className="d-flex justify-content-between align-items-center mb-3">
-            <span className="text-primary">Your cart</span>
-            <span className="badge bg-primary rounded-pill">3</span>
-          </h4>
-          <ul className="list-group mb-3">
-            <li className="list-group-item d-flex justify-content-between lh-sm">
-              <div>
-                <h6 className="my-0">Basic Info</h6>
-                <small className="text-muted">Brief description</small>
-              </div>
-              <span className="text-muted">$12</span>
-            </li>
-            <li className="list-group-item d-flex justify-content-between lh-sm">
-              <div>
-                <h6 className="my-0">Education</h6>
-                <small className="text-muted">Brief description</small>
-              </div>
-              <span className="text-muted">$8</span>
-            </li>
-            <li className="list-group-item d-flex justify-content-between lh-sm">
-              <div>
-                <h6 className="my-0">References</h6>
-                <small className="text-muted">Brief description</small>
-              </div>
-              <span className="text-muted">$5</span>
-            </li>
-            <li className="list-group-item d-flex justify-content-between bg-light">
-              <div className="text-success">
-                <h6 className="my-0">Promo code</h6>
-                <small>EXAMPLECODE</small>
-              </div>
-              <span className="text-success">−$5</span>
-            </li>
-            <li className="list-group-item d-flex justify-content-between">
-              <span>Total (USD)</span>
-              <strong>$20</strong>
-            </li>
-          </ul>
-
-          <form className="card p-2">
-            <div className="input-group">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Promo code"
-              />
-              <button type="submit" className="btn btn-secondary">
-                Redeem
-              </button>
-            </div>
-          </form>
-        </div>
+        <Sidebar />
         <div className="col-md-7 col-lg-8">
           <h4 className="mb-3">Basic Info</h4>
           <form
@@ -144,20 +94,53 @@ function Submit() {
                 </div>
               </div>
 
-              <div className="col-sm-6">
-                <label htmlFor="height" className="form-label">
-                  Height
+              <div className="col-sm-3">
+                <label htmlFor="feet" className="form-label">
+                  Height - Feet
                 </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="height"
-                  placeholder=""
+                <select
+                  className="form-select"
+                  id="feet"
                   required=""
-                  onChange={(e) => setHeight(e.target.value)}
-                />
+                  onChange={(e) => setFeet(e.target.value)}
+                >
+                  <option>Choose...</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                </select>
                 <div className="invalid-feedback">
-                  Valid height is required.
+                  Valid feet is required.
+                </div>
+              </div>
+
+              <div className="col-sm-3">
+                <label htmlFor="inches" className="form-label">
+                  Height - Inches
+                </label>
+                <select
+                  className="form-select"
+                  id="inches"
+                  required=""
+                  onChange={(e) => setInches(e.target.value)}
+                >
+                  <option>Choose...</option>
+                  <option>0</option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
+                  <option>9</option>
+                  <option>10</option>
+                  <option>11</option>
+                </select>
+                <div className="invalid-feedback">
+                  Valid inches is required.
                 </div>
               </div>
 
@@ -188,7 +171,6 @@ function Submit() {
                   required=""
                   onChange={(e) => setState(e.target.value)}
                 >
-                  <option>Choose...</option>
                   <option>Choose...</option>
                   <option value="AL">Alabama</option>
                   <option value="AK">Alaska</option>

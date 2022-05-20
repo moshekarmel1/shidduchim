@@ -1,8 +1,6 @@
 exports.modules = {
     initTables: `
         --drop table if exists app_references;
-        --drop table if exists app_girl;
-        --drop table if exists app_boy;
         --drop table if exists app_zivug;
         --drop table if exists app_user;
         CREATE TABLE IF NOT EXISTS app_user (
@@ -16,10 +14,10 @@ exports.modules = {
         CREATE UNIQUE INDEX IF NOT EXISTS unique_email ON app_user (email);
         CREATE TABLE IF NOT EXISTS app_zivug (
             zivug_id serial PRIMARY KEY,
-            name varchar(50) NOT NULL,
-            gender char(1) not null default 'm' check(gender in ('m', 'f')),
-            dob date NOT NULL,
-            height varchar(50) NOT NULL,
+            name VARCHAR(50) NOT NULL,
+            gender CHAR(1) not null default 'm' check(gender in ('m', 'f')),
+            dob DATE NOT NULL,
+            height INT NOT NULL,
             address varchar(50) NULL,
             state varchar(50) NULL,
             zip varchar(50) NOT NULL,
@@ -30,16 +28,6 @@ exports.modules = {
             CONSTRAINT fk_user_zivug
                 FOREIGN KEY (created_by) 
                     REFERENCES app_user (user_id)
-        );
-        CREATE TABLE IF NOT EXISTS app_boy (
-            zivug_id INT PRIMARY KEY REFERENCES app_zivug (zivug_id),
-            create_date TIMESTAMP default NOW(),
-            foreign key (zivug_id) references app_zivug (zivug_id)
-        );
-        CREATE TABLE IF NOT EXISTS app_girl (
-            zivug_id INT PRIMARY KEY REFERENCES app_zivug (zivug_id),
-            create_date TIMESTAMP default NOW(),
-            foreign key (zivug_id) references app_zivug (zivug_id)
         );
         CREATE TABLE IF NOT EXISTS app_references (
             reference_id serial PRIMARY KEY,

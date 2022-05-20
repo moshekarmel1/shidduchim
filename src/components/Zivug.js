@@ -1,15 +1,20 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getZivug, updateZivug } from "./Service";
+import { getZivug, updateZivug, convertInchesToFeet, getRemainingInches } from "./Service";
+import Sidebar from "./Sidebar";
 
 function Zivug() {
   const { zivug_id } = useParams();
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState({});
+  const [feet, setFeet] = useState();
+  const [inches, setInches] = useState();
   useEffect(() => {
     const getData = async () => {
       const zivug = await getZivug(zivug_id);
       setData(zivug);
+      setFeet(convertInchesToFeet(zivug.height));
+      setInches(getRemainingInches(zivug.height));
       setLoading(false);
     };
     getData();
@@ -17,6 +22,7 @@ function Zivug() {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
+    data.height = (+feet * 12) + +inches;
     const response = await updateZivug(data);
     console.log(response);
   };
@@ -24,65 +30,15 @@ function Zivug() {
   if (isLoading) {
     return <div>Loading...</div>;
   }
+
   if (!data.zivug_id) {
     return <div></div>;
   }
+
   return (
     <div>
       <div className="row g-5">
-        <div className="col-md-5 col-lg-4 order-md-last">
-          <h4 className="d-flex justify-content-between align-items-center mb-3">
-            <span className="text-primary">Your cart</span>
-            <span className="badge bg-primary rounded-pill">3</span>
-          </h4>
-          <ul className="list-group mb-3">
-            <li className="list-group-item d-flex justify-content-between lh-sm">
-              <div>
-                <h6 className="my-0">Basic Info</h6>
-                <small className="text-muted">Brief description</small>
-              </div>
-              <span className="text-muted">$12</span>
-            </li>
-            <li className="list-group-item d-flex justify-content-between lh-sm">
-              <div>
-                <h6 className="my-0">Education</h6>
-                <small className="text-muted">Brief description</small>
-              </div>
-              <span className="text-muted">$8</span>
-            </li>
-            <li className="list-group-item d-flex justify-content-between lh-sm">
-              <div>
-                <h6 className="my-0">References</h6>
-                <small className="text-muted">Brief description</small>
-              </div>
-              <span className="text-muted">$5</span>
-            </li>
-            <li className="list-group-item d-flex justify-content-between bg-light">
-              <div className="text-success">
-                <h6 className="my-0">Promo code</h6>
-                <small>EXAMPLECODE</small>
-              </div>
-              <span className="text-success">−$5</span>
-            </li>
-            <li className="list-group-item d-flex justify-content-between">
-              <span>Total (USD)</span>
-              <strong>$20</strong>
-            </li>
-          </ul>
-
-          <form className="card p-2">
-            <div className="input-group">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Promo code"
-              />
-              <button type="submit" className="btn btn-secondary">
-                Redeem
-              </button>
-            </div>
-          </form>
-        </div>
+        <Sidebar />
         <div className="col-md-7 col-lg-8">
           <h4 className="mb-3">Basic Info</h4>
           <form
@@ -145,21 +101,55 @@ function Zivug() {
                 </div>
               </div>
 
-              <div className="col-sm-6">
-                <label htmlFor="height" className="form-label">
-                  Height
+              <div className="col-sm-3">
+                <label htmlFor="feet" className="form-label">
+                  Height - Feet
                 </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="height"
-                  placeholder="5-08"
+                <select
+                  className="form-select"
+                  id="feet"
                   required=""
-                  value={data.height}
-                  onChange={(e) => (data.height = e.target.value)}
-                />
+                  value={convertInchesToFeet(data.height)}
+                  onChange={(e) => setFeet(e.target.value)}
+                >
+                  <option>Choose...</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                </select>
                 <div className="invalid-feedback">
-                  Valid height is required.
+                  Valid feet is required.
+                </div>
+              </div>
+
+              <div className="col-sm-3">
+                <label htmlFor="inches" className="form-label">
+                  Height - Inches
+                </label>
+                <select
+                  className="form-select"
+                  id="inches"
+                  required=""
+                  value={getRemainingInches(data.height)}
+                  onChange={(e) => setInches(e.target.value)}
+                >
+                  <option>Choose...</option>
+                  <option>0</option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
+                  <option>9</option>
+                  <option>10</option>
+                  <option>11</option>
+                </select>
+                <div className="invalid-feedback">
+                  Valid inches is required.
                 </div>
               </div>
 

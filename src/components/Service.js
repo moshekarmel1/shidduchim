@@ -95,6 +95,14 @@ export async function signupUser(credentials) {
   }).then((data) => data.json());
 }
 
+export function convertInchesToFeet(inches) {
+  return Math.floor(inches / 12);
+}
+
+export function getRemainingInches(inches) {
+  return inches % 12;
+}
+
 export const timeAgo = (() => {
   const second = 1000;
   const minute = second * 60;
