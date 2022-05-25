@@ -5,6 +5,7 @@ import {
   createFamily,
   getFamilyForZivug,
   deleteFamily,
+  calcAge,
   timeAgo,
 } from "./Service";
 
@@ -13,8 +14,8 @@ function Family() {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [name, setName] = useState();
-  const [from_year, setFromYear] = useState(0);
-  const [to_year, setToYear] = useState(0);
+  const [dob, setDOB] = useState(0);
+  const [description, setDescription] = useState(0);
 
   const range = (start, stop, step) =>
     Array.from(
@@ -37,8 +38,8 @@ function Family() {
     const response = await createFamily({
       zivug_id: zivug_id,
       name: name,
-      from_year: +from_year,
-      to_year: +to_year,
+      dob: dob,
+      description: description,
     });
     location.reload();
   };
@@ -66,13 +67,16 @@ function Family() {
                 className="list-group-item list-group-item-action d-flex gap-3 py-3"
                 aria-current="true"
               >
-                <i className="rounded-circle fa-solid fa-school fa-2xl"></i>
+                <i className="rounded-circle fa-solid fa-user fa-2xl"></i>
                 <div className="d-flex gap-2 w-100 justify-content-between">
                   <div>
-                    <h6 className="mb-0">{family.name}</h6>
-                    <p className="mb-0 opacity-75">
-                        {family.from_year} - {family.to_year}
-                    </p>
+                    <h6 className="mb-0">
+                      {family.name} &nbsp;
+                      <span className="badge bg-primary rounded-pill">
+                        {family.dob ? calcAge(family.dob) : "?"}
+                      </span>
+                    </h6>
+                    <p className="mb-0 opacity-75">{family.description}</p>
                   </div>
                   <small className="text-nowrap">
                     <span className="opacity-50">
@@ -82,7 +86,7 @@ function Family() {
                     <button
                       type="button"
                       className="btn btn-danger btn-sm"
-                      onClick={() => handleDelete(family.reference_id)}
+                      onClick={() => handleDelete(family.family_id)}
                     >
                       <i className="fa-solid fa-trash"></i> Delete
                     </button>
@@ -113,52 +117,37 @@ function Family() {
                 <div className="invalid-feedback">Valid name is required.</div>
               </div>
 
-              <div className="col-sm-3">
-                <label htmlFor="from" className="form-label">
-                  From Year
+              <div className="col-sm-6">
+                <label htmlFor="dob" className="form-label">
+                  DOB
                 </label>
-                <select
-                  className="form-select"
-                  id="from"
+                <input
+                  type="date"
+                  className="form-control"
+                  id="dob"
+                  placeholder=""
                   required=""
-                  onChange={(e) => setFromYear(e.target.value)}
-                >
-                  <option>Choose...</option>
-                  {range(
-                    new Date().getFullYear(),
-                    new Date().getFullYear() - 30,
-                    -1
-                  ).map((year) => (
-                    <option key={year} value={year}>
-                      {year}
-                    </option>
-                  ))}
-                </select>
-                <div className="invalid-feedback">Valid From Year is required.</div>
+                  onChange={(e) => setDOB(e.target.value)}
+                />
+                <div className="invalid-feedback">
+                  Valid Date Of Birth is required.
+                </div>
               </div>
 
-              <div className="col-sm-3">
-                <label htmlFor="to" className="form-label">
-                  To Year
+              <div className="col-sm-12">
+                <label htmlFor="description" className="form-label">
+                  Description
                 </label>
-                <select
-                  className="form-select"
-                  id="to"
+                <input
+                  type="text"
+                  className="form-control"
+                  id="description"
                   required=""
-                  onChange={(e) => setToYear(e.target.value)}
-                >
-                  <option>Choose...</option>
-                  {range(
-                    new Date().getFullYear(),
-                    new Date().getFullYear() - 30,
-                    -1
-                  ).map((year) => (
-                    <option key={year} value={year}>
-                      {year}
-                    </option>
-                  ))}
-                </select>
-                <div className="invalid-feedback">Valid To Year is required.</div>
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+                <div className="invalid-feedback">
+                  Valid description is required.
+                </div>
               </div>
             </div>
 

@@ -1,9 +1,10 @@
 exports.modules = {
     initTables: `
+        --drop table app_education;
+        --drop table app_family;
         --drop table if exists app_references;
         --drop table if exists app_zivug;
         --drop table if exists app_user;
-        drop table app_education;
         CREATE TABLE IF NOT EXISTS app_user (
             user_id serial PRIMARY KEY,
             email varchar(500) NOT NULL,
@@ -25,6 +26,7 @@ exports.modules = {
             phone varchar(50) NOT NULL,
             mom varchar(255) NOT NULL,
             dad varchar(255) NOT NULL,
+            shul varchar(255) NOT NULL,
             yeshivishness INT NULL,
             create_date TIMESTAMP default NOW(),
             created_by INT,
@@ -51,7 +53,7 @@ exports.modules = {
             created_by INT
         );
         CREATE TABLE IF NOT EXISTS app_family (
-            education_id serial PRIMARY KEY,
+            family_id serial PRIMARY KEY,
             zivug_id INT NOT NULL REFERENCES app_zivug (zivug_id),
             name varchar(100) NOT NULL,
             description varchar(255) NULL,
@@ -75,8 +77,8 @@ exports.modules = {
         Select * From app_user Where google_id = $1;
     `,
     createZivug: `
-        INSERT INTO app_zivug (name, gender, dob, height, address, state, zip, phone, created_by) VALUES 
-        ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+        INSERT INTO app_zivug (name, gender, dob, height, address, state, zip, phone, dad, mom, shul, created_by) VALUES 
+        ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
         RETURNING *;
     `,
     updateZivug: `
@@ -117,5 +119,16 @@ exports.modules = {
     `,
     getEducationsForZivug: `
         Select * From app_education Where zivug_id = $1;
+    `,
+    createFamily: `
+        INSERT INTO app_family (zivug_id, name, dob, description, created_by) VALUES 
+        ($1, $2, $3, $4, $5)
+        RETURNING *;
+    `,
+    deleteFamily: `
+        Delete From app_family Where family_id = $1;
+    `,
+    getFamilyForZivug: `
+        Select * From app_family Where zivug_id = $1;
     `,
 }

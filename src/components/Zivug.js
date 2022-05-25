@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getZivug, updateZivug, convertInchesToFeet, getRemainingInches } from "./Service";
+import {
+  getZivug,
+  updateZivug,
+  convertInchesToFeet,
+  getRemainingInches,
+} from "./Service";
 import Sidebar from "./Sidebar";
 
 function Zivug() {
@@ -23,7 +28,7 @@ function Zivug() {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    data.height = (+feet * 12) + +inches;
+    data.height = +feet * 12 + +inches;
     const response = await updateZivug(data);
     console.log(response);
   };
@@ -94,7 +99,7 @@ function Zivug() {
                   id="dob"
                   placeholder=""
                   required=""
-                  value={data.dob.split('T')[0]}
+                  value={data.dob.split("T")[0]}
                   onChange={(e) => (data.dob = e.target.value)}
                 />
                 <div className="invalid-feedback">
@@ -119,9 +124,7 @@ function Zivug() {
                   <option>6</option>
                   <option>7</option>
                 </select>
-                <div className="invalid-feedback">
-                  Valid feet is required.
-                </div>
+                <div className="invalid-feedback">Valid feet is required.</div>
               </div>
 
               <div className="col-sm-3">
@@ -241,7 +244,7 @@ function Zivug() {
                 </div>
               </div>
 
-              <div className="col-md-3">
+              <div className="col-md-4">
                 <label htmlFor="zip" className="form-label">
                   Zip
                 </label>
@@ -257,7 +260,7 @@ function Zivug() {
                 <div className="invalid-feedback">Zip code required.</div>
               </div>
 
-              <div className="col-md-5">
+              <div className="col-md-4">
                 <label htmlFor="phone" className="form-label">
                   Phone
                 </label>
@@ -272,6 +275,60 @@ function Zivug() {
                 />
                 <div className="invalid-feedback">
                   Please select a valid phone.
+                </div>
+              </div>
+
+              <div className="col-md-4">
+                <label htmlFor="father" className="form-label">
+                  Father's Name / Occupation
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="father"
+                  placeholder=""
+                  required=""
+                  value={data.dad}
+                  onChange={(e) => (data.dad = e.target.value)}
+                />
+                <div className="invalid-feedback">
+                  Please select a valid Fathers info.
+                </div>
+              </div>
+
+              <div className="col-md-4">
+                <label htmlFor="mother" className="form-label">
+                  Mother's Name / Occupation
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="mother"
+                  placeholder=""
+                  required=""
+                  value={data.mom}
+                  onChange={(e) => (data.mom = e.target.value)}
+                />
+                <div className="invalid-feedback">
+                  Please select a valid Mothers info.
+                </div>
+              </div>
+
+              <div className="col-md-4">
+                <label htmlFor="shul" className="form-label">
+                  Shul / Rav
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="shul"
+                  placeholder=""
+                  required=""
+                  value={data.shul}
+                  onChange={(e) => (data.shul = e.target.value)}
+                />
+                <div className="invalid-feedback">
+                  Please select a valid Shul info.
                 </div>
               </div>
             </div>

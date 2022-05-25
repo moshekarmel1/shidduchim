@@ -82,7 +82,7 @@ function Education() {
                     <button
                       type="button"
                       className="btn btn-danger btn-sm"
-                      onClick={() => handleDelete(education.reference_id)}
+                      onClick={() => handleDelete(education.education_id)}
                     >
                       <i className="fa-solid fa-trash"></i> Delete
                     </button>

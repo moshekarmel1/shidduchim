@@ -55,7 +55,7 @@ function References() {
                 aria-current="true"
               >
                 <i
-                  className="rounded-circle fa-solid fa-user fa-2xl"
+                  className="rounded-circle fa-solid fa-mobile-retro fa-2xl"
                 ></i>
                 <div className="d-flex gap-2 w-100 justify-content-between">
                   <div>

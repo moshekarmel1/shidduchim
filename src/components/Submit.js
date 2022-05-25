@@ -14,6 +14,9 @@ function Submit() {
   const [state, setState] = useState();
   const [zip, setZip] = useState();
   const [phone, setPhone] = useState();
+  const [dad, setDad] = useState();
+  const [mom, setMom] = useState();
+  const [shul, setShul] = useState();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,11 +24,14 @@ function Submit() {
       name: name,
       gender: gender,
       dob: dob,
-      height: (+feet * 12) + +inches,
+      height: +feet * 12 + +inches,
       address: address,
       state: state,
       zip: zip,
       phone: phone,
+      dad: dad,
+      mom: mom,
+      shul: shul,
     });
     console.log(response);
     navigate(`/zivug/${response.zivug_id}`);
@@ -110,9 +116,7 @@ function Submit() {
                   <option>6</option>
                   <option>7</option>
                 </select>
-                <div className="invalid-feedback">
-                  Valid feet is required.
-                </div>
+                <div className="invalid-feedback">Valid feet is required.</div>
               </div>
 
               <div className="col-sm-3">
@@ -229,7 +233,7 @@ function Submit() {
                 </div>
               </div>
 
-              <div className="col-md-3">
+              <div className="col-md-4">
                 <label htmlFor="zip" className="form-label">
                   Zip
                 </label>
@@ -244,7 +248,7 @@ function Submit() {
                 <div className="invalid-feedback">Zip code required.</div>
               </div>
 
-              <div className="col-md-5">
+              <div className="col-md-4">
                 <label htmlFor="phone" className="form-label">
                   Phone
                 </label>
@@ -258,6 +262,57 @@ function Submit() {
                 />
                 <div className="invalid-feedback">
                   Please select a valid phone.
+                </div>
+              </div>
+
+              <div className="col-md-4">
+                <label htmlFor="father" className="form-label">
+                  Father's Name / Occupation
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="father"
+                  placeholder=""
+                  required=""
+                  onChange={(e) => setDad(e.target.value)}
+                />
+                <div className="invalid-feedback">
+                  Please select a valid Fathers info.
+                </div>
+              </div>
+
+              <div className="col-md-4">
+                <label htmlFor="mother" className="form-label">
+                  Mother's Name / Occupation
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="mother"
+                  placeholder=""
+                  required=""
+                  onChange={(e) => setMom(e.target.value)}
+                />
+                <div className="invalid-feedback">
+                  Please select a valid Mothers info.
+                </div>
+              </div>
+
+              <div className="col-md-4">
+                <label htmlFor="shul" className="form-label">
+                  Shul / Rav
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="shul"
+                  placeholder=""
+                  required=""
+                  onChange={(e) => setShul(e.target.value)}
+                />
+                <div className="invalid-feedback">
+                  Please select a valid Shul info.
                 </div>
               </div>
             </div>

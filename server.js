@@ -112,6 +112,9 @@ app.post('/api/zivug', auth, function(req, res, next){
         req.body.state,
         req.body.zip,
         req.body.phone,
+        req.body.dad,
+        req.body.mom,
+        req.body.shul,
         req.auth._id
     ], function(err, response){
         if(err){
@@ -133,6 +136,9 @@ app.put('/api/zivug/:zivug_id', auth, function(req, res, next){
         req.body.state,
         req.body.zip,
         req.body.phone,
+        req.body.dad,
+        req.body.mom,
+        req.body.shul,
         req.auth._id
     ], function(err, response){
         if(err){
@@ -186,7 +192,7 @@ app.post('/api/zivug/:zivug_id/references', auth, function(req, res, next){
 });
 
 app.delete('/api/zivug/:zivug_id/education/:education_id', auth, function(req, res, next){
-    db.query(dbScripts.deleteEducation, [req.params.reference_id], function(err, response){
+    db.query(dbScripts.deleteEducation, [req.params.education_id], function(err, response){
         if(err){
             return next(err);
         }
@@ -221,6 +227,39 @@ app.post('/api/zivug/:zivug_id/education', auth, function(req, res, next){
 
 app.delete('/api/zivug/:zivug_id/education/:education_id', auth, function(req, res, next){
     db.query(dbScripts.deleteEducation, [req.params.education_id], function(err, response){
+        if(err){
+            return next(err);
+        }
+        return res.status(200).json(response.rows);
+    });
+});
+
+app.get('/api/zivug/:zivug_id/family', auth, function(req, res, next){
+    db.query(dbScripts.getFamilyForZivug, [req.params.zivug_id], function(err, response){
+        if(err){
+            return next(err);
+        }
+        return res.status(200).json(response.rows);
+    });
+});
+
+app.post('/api/zivug/:zivug_id/family', auth, function(req, res, next){
+    db.query(dbScripts.createFamily, [
+        req.params.zivug_id,
+        req.body.name,
+        req.body.dob,
+        req.body.description,
+        req.auth._id
+    ], function(err, response){
+        if(err){
+            return next(err);
+        }
+        return res.status(200).json(response.rows[0]);
+    });
+});
+
+app.delete('/api/zivug/:zivug_id/family/:family_id', auth, function(req, res, next){
+    db.query(dbScripts.deleteFamily, [req.params.family_id], function(err, response){
         if(err){
             return next(err);
         }

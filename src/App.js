@@ -8,6 +8,7 @@ import Submit from "./components/Submit";
 import Zivug from "./components/Zivug";
 import References from "./components/References";
 import Education from "./components/Education";
+import Family from "./components/Family";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route exact path="/zivug/:zivug_id" element={<Zivug />} />
             <Route exact path="/zivug/:zivug_id/references" element={<References />} />
             <Route exact path="/zivug/:zivug_id/education" element={<Education />} />
+            <Route exact path="/zivug/:zivug_id/family" element={<Family />} />
           </Routes>
         </div>
       </div>

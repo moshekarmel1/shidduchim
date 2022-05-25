@@ -137,6 +137,37 @@ export async function deleteEducation(zivugId, educationId) {
   }).then((data) => data.json());
 }
 
+export async function createFamily(family) {
+  return fetch(`/api/zivug/${family.zivug_id}/family`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getToken()}`,
+    },
+    body: JSON.stringify(family),
+  }).then((data) => data.json());
+}
+
+export async function getFamilyForZivug(zivugId) {
+  return fetch(`/api/zivug/${zivugId}/family`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getToken()}`,
+    },
+  }).then((data) => data.json());
+}
+
+export async function deleteFamily(zivugId, familyId) {
+  return fetch(`/api/zivug/${zivugId}/family/${familyId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getToken()}`,
+    },
+  }).then((data) => data.json());
+}
+
 export async function loginUser(credentials) {
   return fetch("/api/login", {
     method: "POST",
