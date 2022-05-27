@@ -102,7 +102,6 @@ app.post('/api/login', function(req, res, next){
 });
 
 app.post('/api/zivug', auth, function(req, res, next){
-    console.log(req.body, req.auth);
     db.query(dbScripts.createZivug, [
         req.body.name,
         req.body.gender,
@@ -126,7 +125,6 @@ app.post('/api/zivug', auth, function(req, res, next){
 });
 
 app.put('/api/zivug/:zivug_id', auth, function(req, res, next){
-    console.log(req.body, req.auth);
     db.query(dbScripts.updateZivug, [
         req.body.zivug_id,
         req.body.name,
@@ -177,7 +175,6 @@ app.get('/api/zivug/:zivug_id/references', auth, function(req, res, next){
 });
 
 app.post('/api/zivug/:zivug_id/references', auth, function(req, res, next){
-    console.log(req.body, req.auth);
     db.query(dbScripts.createReference, [
         req.params.zivug_id,
         req.body.name,
@@ -211,7 +208,6 @@ app.get('/api/zivug/:zivug_id/education', auth, function(req, res, next){
 });
 
 app.post('/api/zivug/:zivug_id/education', auth, function(req, res, next){
-    console.log(req.body, req.auth);
     db.query(dbScripts.createEducation, [
         req.params.zivug_id,
         req.body.name,
@@ -261,6 +257,19 @@ app.post('/api/zivug/:zivug_id/family', auth, function(req, res, next){
 
 app.delete('/api/zivug/:zivug_id/family/:family_id', auth, function(req, res, next){
     db.query(dbScripts.deleteFamily, [req.params.family_id], function(err, response){
+        if(err){
+            return next(err);
+        }
+        return res.status(200).json(response.rows);
+    });
+});
+
+app.get('/api/search', auth, function(req, res, next){
+    db.query(dbScripts.searchForZivug, [
+        req.query.gender,
+        req.query.zip,
+        req.query.height,
+    ], function(err, response){
         if(err){
             return next(err);
         }

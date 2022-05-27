@@ -43,6 +43,16 @@ export async function getZivug(zivugId) {
   }).then((data) => data.json());
 }
 
+export async function searchForZivug(gender, zip, height) {
+  return fetch(`/api/search?gender=${gender}&zip=${zip}&height=${height}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getToken()}`,
+    },
+  }).then((data) => data.json());
+}
+
 export async function createZivug(zivug) {
   return fetch("/api/zivug", {
     method: "POST",

@@ -131,4 +131,7 @@ exports.modules = {
     getFamilyForZivug: `
         Select * From app_family Where zivug_id = $1;
     `,
+    searchForZivug: `
+        Select * From app_zivug Where gender = $1 and zip > $2 and height > $3;
+    `,
 }
