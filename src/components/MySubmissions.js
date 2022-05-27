@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getMySubmissions, timeAgo } from "./Service";
+import { Link } from "react-router-dom";
 
 function MySubmissions() {
   const [isLoading, setLoading] = useState(true);
@@ -27,10 +28,10 @@ function MySubmissions() {
       {data.map((submission) => (
         <div key={submission.zivug_id} className="media text-muted pt-3">
           <p className="pb-3 mb-0 lh-sm border-bottom">
-            <a href={`/zivug/${submission.zivug_id}`} className="d-block text-gray-dark">
+            <Link to={`/zivug/${submission.zivug_id}`} className="d-block text-gray-dark">
                 <i className={`fa-solid fa-person${submission.gender == 'f' ? '-dress' : ''} fa-xl`}></i>&nbsp; 
                 {submission.name}
-            </a>
+            </Link>
             Created {timeAgo(new Date(submission.create_date))}
           </p>
         </div>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./Login.css";
 import { loginUser, setToken } from "./Service";
 
@@ -64,9 +64,9 @@ function Login() {
             <button className="w-100 btn btn-lg btn-primary" type="submit">
               Sign in
             </button>
-            <a className="w-100 btn btn-link" href="/sign-up">
+            <Link className="w-100 btn btn-link" to="/sign-up">
               Or, if you're new here, Sign up
-            </a>
+            </Link>
             <p className="mt-5 mb-3 text-muted">© 2022</p>
           </form>
         </div>

@@ -24,9 +24,7 @@ function Search() {
       <div className="py-5 text-center">
         <h2>Search</h2>
         <p className="lead">
-          Below is an example form built entirely with Bootstrap’s form
-          controls. Each required form group has a validation state that can be
-          triggered by attempting to submit the form without completing it.
+          Find your perfect match by entering your information below.
         </p>
       </div>
 

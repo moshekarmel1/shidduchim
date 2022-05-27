@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { getZivug, calcAge } from "./Service";
 
 function Sidebar(props) {
@@ -39,12 +39,12 @@ function Sidebar(props) {
           }`}
         >
           <div>
-            <a
+            <Link
               className={!zivug_id ? "disabled" : ""}
-              href={`/zivug/${zivug_id}`}
+              to={`/zivug/${zivug_id}`}
             >
               <h6 className="my-0">Basic Info</h6>
-            </a>
+            </Link>
             <small className="text-muted">Brief description</small>
           </div>
           <span></span>
@@ -55,12 +55,12 @@ function Sidebar(props) {
           }`}
         >
           <div>
-            <a
+            <Link
               className={!zivug_id ? "disabled" : ""}
-              href={`/zivug/${zivug_id}/family`}
+              to={`/zivug/${zivug_id}/family`}
             >
               <h6 className="my-0">Family</h6>
-            </a>
+            </Link>
             <small className="text-muted">Brief description</small>
           </div>
           <span></span>
@@ -71,12 +71,12 @@ function Sidebar(props) {
           }`}
         >
           <div>
-            <a
+            <Link
               className={!zivug_id ? "disabled" : ""}
-              href={`/zivug/${zivug_id}/education`}
+              to={`/zivug/${zivug_id}/education`}
             >
               <h6 className="my-0">Education</h6>
-            </a>
+            </Link>
             <small className="text-muted">Brief description</small>
           </div>
           <span></span>
@@ -87,12 +87,12 @@ function Sidebar(props) {
           }`}
         >
           <div>
-            <a
+            <Link
               className={!zivug_id ? "disabled" : ""}
-              href={`/zivug/${zivug_id}/references`}
+              to={`/zivug/${zivug_id}/references`}
             >
               <h6 className="my-0">References</h6>
-            </a>
+            </Link>
             <small className="text-muted">Brief description</small>
           </div>
           <span></span>

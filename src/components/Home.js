@@ -1,7 +1,11 @@
 import logo from "./../logo.svg";
 import MySubmissions from "./MySubmissions";
+import { useNavigate, Link } from "react-router-dom";
+import { getToken } from "./Service";
 
 function Home() {
+  const navigate = useNavigate();
+  const token = getToken();
   return (
     <div>
       <div className="text-center">
@@ -27,9 +31,7 @@ function Home() {
             <p>
               Narrow down the search when finding your fish in the sea.
             </p>
-            <a href="/search" className="btn btn-primary">
-              Search &raquo;
-            </a>
+            <Link to="/search" className="btn btn-primary">Search &raquo;</Link>
           </div>
         </div>
         <div className="col d-flex align-items-start">
@@ -41,9 +43,9 @@ function Home() {
             <p>
               It's a lot easier than asking your shvugger to email it to you.
             </p>
-            <a href="/submit" className="btn btn-primary">
+            <Link to="/submit" className="btn btn-primary">
               Submit Resumes &raquo;
-            </a>
+            </Link>
           </div>
         </div>
         <div className="col d-flex align-items-start">
@@ -55,15 +57,15 @@ function Home() {
             <p>
               It's the secret sauce that powers the matching algorithm.
             </p>
-            <a href="/faq" className="btn btn-primary">
+            <Link to="/faq" className="btn btn-primary">
               Find out more &raquo;
-            </a>
+            </Link>
           </div>
         </div>
       </div>
       <div className="row">
         <div className="col-md-6">
-          <MySubmissions />
+          {token && <MySubmissions />}
         </div>
         <div className="col-md-6">
           

@@ -1,4 +1,5 @@
 import { calcAge } from "./Service";
+import { Link } from "react-router-dom";
 
 function Grid(props) {
   return (
@@ -14,9 +15,9 @@ function Grid(props) {
               {calcAge(row.dob)} years old, {Math.floor(row.height / 12)} ft {row.height % 12} in <br />
               {row.city}, {row.state}
             </p>
-            <a href={`/view/${row.zivug_id}`} className="btn btn-primary">
+            <Link to={`/view/${row.zivug_id}`} className="btn btn-primary">
               View &raquo;
-            </a>
+            </Link>
           </div>
         </div>
       ))}
