@@ -20,7 +20,8 @@ exports.modules = {
             gender CHAR(1) not null default 'm' check(gender in ('m', 'f')),
             dob DATE NOT NULL,
             height INT NOT NULL,
-            address varchar(50) NULL,
+            address varchar(255) NULL,
+            city varchar(50) NULL,
             state varchar(50) NULL,
             zip varchar(50) NOT NULL,
             phone varchar(50) NOT NULL,
@@ -77,15 +78,14 @@ exports.modules = {
         Select * From app_user Where google_id = $1;
     `,
     createZivug: `
-        INSERT INTO app_zivug (name, gender, dob, height, address, state, zip, phone, dad, mom, shul, created_by) VALUES 
-        ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+        INSERT INTO app_zivug (name, gender, dob, height, address, city, state, zip, phone, dad, mom, shul, created_by) VALUES 
+        ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
         RETURNING *;
     `,
     updateZivug: `
         UPDATE app_zivug
         SET name=$2,
         gender=$3,
-        
         WHERE zivug_id = $1
         RETURNING *;
     `,

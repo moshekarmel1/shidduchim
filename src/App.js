@@ -9,6 +9,7 @@ import Zivug from "./components/Zivug";
 import References from "./components/References";
 import Education from "./components/Education";
 import Family from "./components/Family";
+import View from "./components/View";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/sign-up" element={<Signup />} />
             <Route exact path="/submit" element={<Submit />} />
+            <Route exact path="/view/:zivug_id" element={<View />} />
             <Route exact path="/zivug/:zivug_id" element={<Zivug />} />
             <Route exact path="/zivug/:zivug_id/references" element={<References />} />
             <Route exact path="/zivug/:zivug_id/education" element={<Education />} />

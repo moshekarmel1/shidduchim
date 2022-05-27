@@ -47,7 +47,7 @@ function Sidebar(props) {
             </a>
             <small className="text-muted">Brief description</small>
           </div>
-          <span>$12</span>
+          <span></span>
         </li>
         <li
           className={`list-group-item d-flex justify-content-between lh-sm ${
@@ -63,7 +63,7 @@ function Sidebar(props) {
             </a>
             <small className="text-muted">Brief description</small>
           </div>
-          <span>$5</span>
+          <span></span>
         </li>
         <li
           className={`list-group-item d-flex justify-content-between lh-sm ${
@@ -79,7 +79,7 @@ function Sidebar(props) {
             </a>
             <small className="text-muted">Brief description</small>
           </div>
-          <span>$8</span>
+          <span></span>
         </li>
         <li
           className={`list-group-item d-flex justify-content-between lh-sm ${
@@ -95,33 +95,9 @@ function Sidebar(props) {
             </a>
             <small className="text-muted">Brief description</small>
           </div>
-          <span>$5</span>
-        </li>
-        <li className="list-group-item d-flex justify-content-between bg-light">
-          <div className="text-success">
-            <h6 className="my-0">Promo code</h6>
-            <small className="text-muted">EXAMPLECODE</small>
-          </div>
-          <span className="text-success">−$5</span>
-        </li>
-        <li className="list-group-item d-flex justify-content-between">
-          <span>Total (USD)</span>
-          <strong>$20</strong>
+          <span></span>
         </li>
       </ul>
-
-      <form className="card p-2">
-        <div className="input-group">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Promo code"
-          />
-          <button type="submit" className="btn btn-secondary">
-            Redeem
-          </button>
-        </div>
-      </form>
     </div>
   );
 }

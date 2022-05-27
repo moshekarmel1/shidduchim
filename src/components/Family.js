@@ -44,12 +44,6 @@ function Family() {
     location.reload();
   };
 
-  const handleDelete = async (family_id) => {
-    const response = await deleteFamily(zivug_id, family_id);
-    console.log(response);
-    location.reload();
-  };
-
   if (isLoading) {
     return <div>Loading...</div>;
   }

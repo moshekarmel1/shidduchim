@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Sidebar from "./Sidebar";
+import EducationList from "./EducationList";
 import {
   createEducation,
   getEducationForZivug,
-  deleteEducation,
-  timeAgo,
 } from "./Service";
 
 function Education() {
@@ -43,12 +42,6 @@ function Education() {
     location.reload();
   };
 
-  const handleDelete = async (reference_id) => {
-    const response = await deleteEducation(zivug_id, reference_id);
-    console.log(response);
-    location.reload();
-  };
-
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -58,39 +51,7 @@ function Education() {
       <div className="row g-5">
         <Sidebar active="Education" />
         <div className="col-md-7 col-lg-8">
-          <h4 className="mb-3">Education</h4>
-          <div className="list-group">
-            {data.map((education) => (
-              <div
-                key={education.education_id}
-                className="list-group-item list-group-item-action d-flex gap-3 py-3"
-                aria-current="true"
-              >
-                <i className="rounded-circle fa-solid fa-school fa-2xl"></i>
-                <div className="d-flex gap-2 w-100 justify-content-between">
-                  <div>
-                    <h6 className="mb-0">{education.name}</h6>
-                    <p className="mb-0 opacity-75">
-                        {education.from_year} - {education.to_year}
-                    </p>
-                  </div>
-                  <small className="text-nowrap">
-                    <span className="opacity-50">
-                      {timeAgo(new Date(education.create_date))}
-                    </span>{" "}
-                    <br />
-                    <button
-                      type="button"
-                      className="btn btn-danger btn-sm"
-                      onClick={() => handleDelete(education.education_id)}
-                    >
-                      <i className="fa-solid fa-trash"></i> Delete
-                    </button>
-                  </small>
-                </div>
-              </div>
-            ))}
-          </div>
+          <EducationList data={data} delete={true} />
           <br />
           <form
             className="needs-validation"

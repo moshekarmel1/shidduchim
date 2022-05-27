@@ -109,6 +109,7 @@ app.post('/api/zivug', auth, function(req, res, next){
         req.body.dob,
         req.body.height,
         req.body.address,
+        req.body.city,
         req.body.state,
         req.body.zip,
         req.body.phone,

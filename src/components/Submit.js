@@ -11,6 +11,7 @@ function Submit() {
   const [feet, setFeet] = useState();
   const [inches, setInches] = useState();
   const [address, setAddress] = useState();
+  const [city, setCity] = useState();
   const [state, setState] = useState();
   const [zip, setZip] = useState();
   const [phone, setPhone] = useState();
@@ -26,6 +27,7 @@ function Submit() {
       dob: dob,
       height: +feet * 12 + +inches,
       address: address,
+      city: city,
       state: state,
       zip: zip,
       phone: phone,
@@ -148,7 +150,7 @@ function Submit() {
                 </div>
               </div>
 
-              <div className="col-12">
+              <div className="col-8">
                 <label htmlFor="address" className="form-label">
                   Address
                 </label>
@@ -161,8 +163,23 @@ function Submit() {
                   onChange={(e) => setAddress(e.target.value)}
                 />
                 <div className="invalid-feedback">
-                  Please enter your shipping address.
+                  Please enter your address.
                 </div>
+              </div>
+
+              <div className="col-md-4">
+                <label htmlFor="city" className="form-label">
+                  City
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="city"
+                  placeholder=""
+                  required=""
+                  onChange={(e) => setCity(e.target.value)}
+                />
+                <div className="invalid-feedback">City is required.</div>
               </div>
 
               <div className="col-md-4">

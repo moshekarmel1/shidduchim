@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Sidebar from "./Sidebar";
-import { createReference, getReferencesForZivug, deleteReference, timeAgo } from "./Service";
+import { createReference, getReferencesForZivug } from "./Service";
+import ReferencesList from "./ReferencesList";
 
 function References() {
   const { zivug_id } = useParams();
@@ -32,12 +33,6 @@ function References() {
     location.reload();
   };
 
-  const handleDelete = async (reference_id) => {
-    const response = await deleteReference(zivug_id, reference_id);
-    console.log(response);
-    location.reload();
-  };
-
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -47,32 +42,7 @@ function References() {
       <div className="row g-5">
         <Sidebar active="Reference" />
         <div className="col-md-7 col-lg-8">
-          <h4 className="mb-3">References</h4>
-          <div className="list-group">
-            {data.map((reference) => (
-              <div key={reference.reference_id}
-                className="list-group-item list-group-item-action d-flex gap-3 py-3"
-                aria-current="true"
-              >
-                <i
-                  className="rounded-circle fa-solid fa-mobile-retro fa-2xl"
-                ></i>
-                <div className="d-flex gap-2 w-100 justify-content-between">
-                  <div>
-                    <h6 className="mb-0">{reference.name}</h6>
-                    <p className="mb-0 opacity-75">
-                      <a href={`tel:${reference.phone_number}`}>{reference.phone_number}</a> | {reference.relationship}
-                    </p>
-                  </div>
-                  <small className="text-nowrap">
-                    <span className="opacity-50">{timeAgo(new Date(reference.create_date))}</span> <br />
-                    <button type="button" className="btn btn-danger btn-sm" onClick={() => handleDelete(reference.reference_id)}>
-                        <i className="fa-solid fa-trash"></i> Delete</button>
-                  </small>
-                </div>
-              </div>
-            ))}
-          </div>
+          <ReferencesList data={data} delete={true} />
           <br />
           <form
             className="needs-validation"

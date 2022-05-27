@@ -157,7 +157,7 @@ function Zivug() {
                 </div>
               </div>
 
-              <div className="col-12">
+              <div className="col-8">
                 <label htmlFor="address" className="form-label">
                   Address
                 </label>
@@ -171,8 +171,24 @@ function Zivug() {
                   onChange={(e) => (data.address = e.target.value)}
                 />
                 <div className="invalid-feedback">
-                  Please enter your shipping address.
+                  Please enter your address.
                 </div>
+              </div>
+
+              <div className="col-md-4">
+                <label htmlFor="city" className="form-label">
+                  City
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="city"
+                  placeholder=""
+                  required=""
+                  value={data.city}
+                  onChange={(e) => (data.city = e.target.value)}
+                />
+                <div className="invalid-feedback">City is required.</div>
               </div>
 
               <div className="col-md-4">
