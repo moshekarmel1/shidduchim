@@ -334,9 +334,19 @@ app.delete(
 );
 
 app.get("/api/search", auth, function (req, res, next) {
+  // to search dob, convert age to a date based on today's date
+  const now = new Date();
+  now.setFullYear(now.getFullYear() - (+req.query.age || 0));
+  const dob = now.toISOString().slice(0, 10);
+  console.log(dob);
   db.query(
     dbScripts.searchForZivug,
-    [req.query.gender, req.query.zip, req.query.height],
+    [
+      req.query.gender, 
+      req.query.zip, 
+      req.query.height, 
+      dob
+    ],
     function (err, response) {
       if (err) {
         return next(err);

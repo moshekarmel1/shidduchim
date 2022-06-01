@@ -97,6 +97,22 @@ function Sidebar(props) {
           </div>
           <span></span>
         </li>
+        <li
+          className={`list-group-item d-flex justify-content-between lh-sm ${
+            props.active == "Yeshivishness" ? "active" : ""
+          }`}
+        >
+          <div>
+            <Link
+              className={!zivug_id ? "disabled" : ""}
+              to={`/zivug/${zivug_id}/yeshivishness`}
+            >
+              <h6 className="my-0">Yeshivishness</h6>
+            </Link>
+            <small className="text-muted">Brief description</small>
+          </div>
+          <span></span>
+        </li>
       </ul>
     </div>
   );

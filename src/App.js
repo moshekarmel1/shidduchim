@@ -11,6 +11,7 @@ import Education from "./components/Education";
 import Family from "./components/Family";
 import View from "./components/View";
 import Search from "./components/Search";
+import Yeshivishness from "./components/Yeshivishness";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route exact path="/zivug/:zivug_id/references" element={<References />} />
             <Route exact path="/zivug/:zivug_id/education" element={<Education />} />
             <Route exact path="/zivug/:zivug_id/family" element={<Family />} />
+            <Route exact path="/zivug/:zivug_id/yeshivishness" element={<Yeshivishness />} />
           </Routes>
         </div>
       </div>

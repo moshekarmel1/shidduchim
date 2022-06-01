@@ -11,10 +11,11 @@ function Search() {
   const [zip, setZip] = useState("00001");
   const [height, setHeight] = useState(48);
   const [data, setData] = useState([]);
+  const [age, setAge] = useState(18);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const results = await searchForZivug(gender, zip, height);
+    const results = await searchForZivug(gender, zip, height, age);
     console.log(results);
     setData(results);
   };
@@ -81,6 +82,25 @@ function Search() {
                 {`${convertInchesToFeet(height)} ft ${getRemainingInches(
                   height
                 )} in`}
+              </output>
+            </div>
+            <br />
+            <div>
+              <label htmlFor="age" className="form-label">
+                Older than
+              </label>
+              <input
+                type="range"
+                className="form-range"
+                min="18"
+                max="50"
+                step="1"
+                id="age"
+                defaultValue={18}
+                onChange={(e) => setAge(e.target.value)}
+              />
+              <output>
+                {`${age} years old`}
               </output>
             </div>
             <br />
