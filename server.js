@@ -42,11 +42,11 @@ app.use(function (err, req, res, next) {
   }
 });
 // Populate the DB tables
-/*db.query(dbScripts.initTables, [], (err, res) => {
+db.query(dbScripts.initTables, [], (err, res) => {
   if (err) {
     console.log(err.stack);
   }
-});*/
+});
 
 app.get("/api/hello", function (req, res) {
   res.json({
