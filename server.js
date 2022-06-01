@@ -41,12 +41,12 @@ app.use(function (err, req, res, next) {
     res.status(500).json(err.message);
   }
 });
-// Populate the `Users` & `Flows` tables
-db.query(dbScripts.initTables, [], (err, res) => {
+// Populate the DB tables
+/*db.query(dbScripts.initTables, [], (err, res) => {
   if (err) {
     console.log(err.stack);
   }
-});
+});*/
 
 app.get("/api/hello", function (req, res) {
   res.json({
