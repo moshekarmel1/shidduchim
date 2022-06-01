@@ -338,7 +338,6 @@ app.get("/api/search", auth, function (req, res, next) {
   const now = new Date();
   now.setFullYear(now.getFullYear() - (+req.query.age || 0));
   const dob = now.toISOString().slice(0, 10);
-  console.log(dob);
   db.query(
     dbScripts.searchForZivug,
     [

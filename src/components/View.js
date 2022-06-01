@@ -67,6 +67,9 @@ function View() {
         <a href="#" className="btn btn-primary btn px-4">
           Download Resume
         </a>
+        <a href={`/zivug/${zivug_id}`} className="btn btn-link btn px-4">
+          <i className="fa fa-solid fa-pencil"></i> Edit
+        </a>
       </div>
 
       <hr className="col-3 col-md-2 mb-5" />
