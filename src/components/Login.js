@@ -16,7 +16,7 @@ function Login() {
       password,
     });
     setToken(token);
-    navigate("/home");
+    navigate("/");
   };
 
   return (
